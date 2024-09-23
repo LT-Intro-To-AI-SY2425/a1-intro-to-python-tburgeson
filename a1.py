@@ -42,10 +42,14 @@ def factorial(n: int) -> int:
     Returns:
         factorial of the passed in number
     """
+    result = 1
+    for x in range (1,n+1): # n+1 removes 0
+        result = result * x # same as result = result * x
+    #print(result)
+    return result
     
 
 T = TypeVar("T")
-
 
 def every_other(lst: List[T]) -> List[T]:
     """Takes a list and returns a list of every other element in the list, starting with
@@ -58,8 +62,15 @@ def every_other(lst: List[T]) -> List[T]:
     Returns:
         a list of every of other item in the original list starting with the first
     """
-    raise NotImplementedError("every_other")
+    #java method
+    # new_lst = []
+    # for i in range(0,len(lst),2):
+    #     #print(lst[i])
+    #     new_lst.append(lst[i])
+    # return new_lst
 
+    #python method
+    return lst[::2]
 
 def sum_list(lst: List[int]) -> int:
     """Takes a list of numbers, and returns the sum of the numbers in that list. Cannot
@@ -71,9 +82,13 @@ def sum_list(lst: List[int]) -> int:
     Returns:
         the sum of the passed in list
     """
-    raise NotImplementedError("sum_list")
-
-
+    
+    value = 0
+    for el in lst:
+        value += el
+    #print(value)
+    return value
+    
 def mean(lst: List[int]) -> float:
     """Takes a list of numbers, and returns the mean of the numbers.
 
@@ -83,8 +98,14 @@ def mean(lst: List[int]) -> float:
     Returns:
         the mean of the passed in list
     """
-    raise NotImplementedError("mean")
+    #java method
+    # value = 0
+    # for el in lst:
+    #     value += el
+    # value /= len(lst)
+    # return value
 
+    return sum_list(lst) / len(lst if lst else 0)
 
 def median(lst: List[int]) -> float:
     """Takes an ordered list of numbers, and returns the median of the numbers.
@@ -98,7 +119,13 @@ def median(lst: List[int]) -> float:
     Returns:
         the median of the passed in list
     """
-    raise NotImplementedError("median")
+    if len(lst) % 2 == 1:
+        mid = len(lst) // 2
+        return lst[mid]
+    else:
+        mid1 = len(lst) / 2
+        #print(mid1)
+        lst[mid1]
 
 
 def duck_duck_goose(lst: List[str]) -> List[str]:
@@ -120,10 +147,24 @@ def duck_duck_goose(lst: List[str]) -> List[str]:
     Returns:
         the resulting list after playing duck duck goose
     """
-    raise NotImplementedError("duck_duck_goose")
+    i=0
+    current = "duck1"
+    while 2 < len(lst):
+        if current== "duck1":
+            i += 1
+            current="duck2"
+        elif current=="duck2":
+            i += 1
+            current = "goose"
+        else: 
+            lst.pop(i)
+            current= "duck1"
+        if i == len(lst):
+            i=0
 
+    return lst
 
-# this line causes the nested code to be skipped if the file is imported instead of run
+# this line causes the nested code to be skipped if the file    is imported instead of run
 if __name__ == "__main__":
     assert absolute(-1) == 1, "absolute of -1 failed"
     assert factorial(4) == 24, "factorial of 4 failed"
